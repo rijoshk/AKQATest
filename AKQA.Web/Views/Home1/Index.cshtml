@@ -1,0 +1,58 @@
+﻿@model AKQA.Web.Models.UserData
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    label {
+        width: 200px;
+    }
+</style>
+
+<script type="text/javascript">
+    function ConvertAmountValue()
+    {
+        var amt = $('#txtAmount').val();
+        var urlVal = "http://localhost:50383/api/AKQAService/GetAmountValue?amount=" + amt
+        console.log(urlVal);
+        $.ajax({  
+            type: "GET",
+            url: urlVal,
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                $('#lblName').text($('#txtName').val());
+                $('#lblAmount').text(data);
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+    
+</script>
+
+<div style="margin-left: 25px">
+    <h2>AKQA Test</h2>
+    <div>
+        <label><b>Enter Name:</b></label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" id="txtName" />
+    </div>
+    <br />
+    <div>
+        <b>Enter Amount: </b>
+        <input type="text" id="txtAmount" /><br /><br />
+    </div>
+    <input type="button" value="Submit Data" onclick="ConvertAmountValue()">
+    <br />
+    <br />
+    <b>
+        <label id="lblName" for="Name"><b></b></label>
+    </b>
+    <br />
+    <br />
+    <b>
+        <label id="lblAmount" for="Amount"></label>
+    </b>
+    <br /><br />
+</div>
